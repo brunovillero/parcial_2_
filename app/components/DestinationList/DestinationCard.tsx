@@ -57,8 +57,8 @@ export default function DestinationCard({ destination, handleDeleteList, handleF
     }
     return (
         <View style={styles.container}>
-            <Text>Destino: {destination.name}</Text>
-            <Text>Dificultad: <View style={getDifficultyColor(destination.difficulty)}></View></Text>
+            <Text style={styles.text}>Destino: {destination.name}</Text>
+            <Text style={styles.text}>Dificultad: <View style={getDifficultyColor(destination.difficulty)}></View></Text>
             <TouchableOpacity onPress={handleFavourite}>
                 <View style={styles.favourite}>
                     <Text>{favourite ? 'Favorito' : 'No Favorito'}</Text>
@@ -74,6 +74,11 @@ export default function DestinationCard({ destination, handleDeleteList, handleF
 }
 
 const styles = StyleSheet.create({
+    text : {
+        fontSize: 20,
+        fontWeight: 'bold',
+        margin: 10,
+    },
     container: {
         padding: 10,
         flex: 1,

@@ -6,8 +6,6 @@ import { API_URL, Destination } from "../components/context/ctx";
 
 export default function Edit() {
     const { id } = useLocalSearchParams();
-    const { id: globalId } = useGlobalSearchParams();
-    console.log(id);
 
     const [destination, setDestination] = useState<Destination>({
         id: '',
@@ -18,12 +16,11 @@ export default function Edit() {
     });
 
     useEffect(() => {
-        fetch(API_URL, {
+        fetch(API_URL + '/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(id)
         })
             .then(response => response.json())
             .then(responseJson => {

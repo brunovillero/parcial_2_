@@ -40,10 +40,7 @@ export default function CreateForm() {
     }
 
     const handleEdit = () => {
-        router.setParams({
-            id: destination.id
-        });
-        router.push('/edit')
+        router.push({ pathname: '/edit', params: { id: destination.id } });
     }
 
 
