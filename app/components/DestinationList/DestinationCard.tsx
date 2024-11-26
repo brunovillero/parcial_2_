@@ -12,8 +12,7 @@ export default function DestinationCard({ destination, handleDeleteList, handleF
     }, [destination]);
 
     const handleFavourite = () => {
-        handleFavouriteList(destination.id, favourite);
-        fetch(API_URL, {
+        fetch(API_URL + '/' + destination.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,18 +22,19 @@ export default function DestinationCard({ destination, handleDeleteList, handleF
             .then(response => response.json())
             .then(responseJson => {
                 console.log(responseJson);
+                setFavourite(responseJson.favourite);
             })
             .catch(error => console.error(error)); 
     }
 
     const handleDelete = () => {
         handleDeleteList(destination.id);
-        fetch(API_URL, {
+        fetch(API_URL + '/' + destination.id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(destination.id)
+            body: JSON.stringify(destination)
         })
             .then(response => response.json())
             .then(responseJson => {
@@ -61,7 +61,7 @@ export default function DestinationCard({ destination, handleDeleteList, handleF
             <Text style={styles.text}>Dificultad: <View style={getDifficultyColor(destination.difficulty)}></View></Text>
             <TouchableOpacity onPress={handleFavourite}>
                 <View style={styles.favourite}>
-                    <Text>{favourite ? 'Favorito' : 'No Favorito'}</Text>
+                    {favourite ? <Text style={styles.favouriteText}>Favorito</Text> : <Text style={styles.notFavouriteText}>No Favorito</Text>}
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleDelete}>
@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
         width: 100,
         height: 40,
         borderRadius: 20,
-        backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
@@ -122,5 +121,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
+    },
+    favouriteText: {
+        height: 20,
+        color: 'white',
+        backgroundColor: 'green',
+        margin: 10,
+        borderRadius: 20,
+    },
+    notFavouriteText: {
+        height: 20,
+        color: 'white',
+        margin: 10,
+        backgroundColor: 'red',
+        borderRadius: 20,
     }
 });
