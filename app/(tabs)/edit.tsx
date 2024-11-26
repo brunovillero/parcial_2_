@@ -16,6 +16,10 @@ export default function Edit() {
     });
 
     useEffect(() => {
+        if (!id) {
+            return;
+        }
+        
         fetch(API_URL + '/' + id, {
             method: 'GET',
             headers: {

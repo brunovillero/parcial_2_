@@ -21,7 +21,6 @@ export default function DestinationCard({ destination, handleDeleteList, handleF
         })
             .then(response => response.json())
             .then(responseJson => {
-                console.log(responseJson);
                 setFavourite(responseJson.favourite);
             })
             .catch(error => console.error(error)); 
